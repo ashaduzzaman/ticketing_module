@@ -145,11 +145,9 @@ class DistrictController extends Controller
         try {
             District::find($id)->delete();
             return back()->with('success', 'Successfully Deleted!');
-          
-          } catch (\Illuminate\Database\QueryException $e) {
-            logger($e->errorInfo);
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('Alert!!!', 'Sorry, something went wrong. You can not delete');
             return back();
-          }
+        }
     }
 }

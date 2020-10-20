@@ -17,13 +17,11 @@ class CreateEscalationsTable extends Migration
             $table->increments('id');
             $table->integer('query_type_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('mail_to')->unsigned();
             $table->string('mail_cc')->nullable();
             $table->timestamps();
 
             $table->foreign('query_type_id')->references('id')->on('query_types');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('mail_to')->references('id')->on('users');
         });
     }
 

@@ -17,4 +17,24 @@ class Crm extends Model
     {
     	return $this->belongsTo(District::class, 'district_id');
     }
+
+    public function query_type()
+    {
+    	return $this->belongsTo(QueryType::class, 'query_type_id');
+    }
+
+    public function complain_type()
+    {
+    	return $this->belongsTo(ComplainType::class, 'complain_type_id');
+    }
+
+    public function call_remark()
+    {
+    	return $this->belongsTo(CallRemark::class, 'call_remark_id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class);
+    }
 }

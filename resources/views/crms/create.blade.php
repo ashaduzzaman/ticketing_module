@@ -130,10 +130,20 @@
                 </div>
               </div>
               
-              <div class="form-group">
+              <div class="form-row">
+                <div class="form-group col-md-6">
                   {{ Form::label('Call Remarks') }}
                   {{ Form::select('call_remark_id', $call_remarks, null, array('class'=>'form-control', 'placeholder'=>'Please select ...')) }}
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="raiseTicket">Raise Ticket</label>
+                  <select name="raiseTicket" id="raiseTicket" class="form-control">
+                    <option value="No">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+
+                </div>
+              </div>
               <div class="form-group">
                 <label for="verbatim">Verbatim</label>
                 <input type="text" class="form-control" id="verbatim" name="verbatim" placeholder="Enter Verbatim">

@@ -227,14 +227,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
+          
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+              <i  style="color: #4BE7EF;" class="nav-icon fa fa-paperclip"></i>
               <p>
-                Simple Link
+                Ticketing Matrix
+                <i style="color: #1A4772;" class="right fa fa-angle-left"></i>
               </p>
             </a>
-          </li> -->
+            <ul class="nav nav-treeview sub-nav">
+              <li class="nav-item">
+                <a href="/escalation" class="nav-link {{ 'escalation' == \Request::segment(1) ? 'active' : '' }}">
+                  <i style="color: #D41397;" class="fas fa-sitemap nav-icon"></i>
+                  <p>
+                    Mapping
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
