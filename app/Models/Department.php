@@ -9,4 +9,9 @@ class Department extends Model
     protected $table = 'departments';
 
     protected $fillable = ['name'];
+
+    public function crm()
+    {
+        return $this->hasMany(Crm::class);
+    }
 }

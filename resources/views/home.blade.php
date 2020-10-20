@@ -120,12 +120,12 @@
     <div class="row">
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-calendar-plus"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">New Ticket</span>
                 <span class="info-box-number">
-                  102
+                  {{ $new }}
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -135,11 +135,11 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-spinner"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">WIP Ticket</span>
-                <span class="info-box-number">41</span>
+                <span class="info-box-number">{{ $wip }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -152,11 +152,11 @@
 
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-reply"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Answered Ticket</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-number">{{ $answered }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -165,11 +165,11 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-times"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Closed Ticket</span>
-                <span class="info-box-number">200</span>
+                <span class="info-box-number">{{ $closed }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>

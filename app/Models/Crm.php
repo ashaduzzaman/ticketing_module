@@ -18,6 +18,11 @@ class Crm extends Model
     	return $this->belongsTo(District::class, 'district_id');
     }
 
+    public function department()
+    {
+    	return $this->belongsTo(Department::class, 'department_id');
+    }
+
     public function query_type()
     {
     	return $this->belongsTo(QueryType::class, 'query_type_id');

@@ -23,6 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ticket', 'TicketController@index')->name('ticket');
 Route::get('/ticket/show/{id}','TicketController@show');
+Route::post('/ticket/{id}','TicketController@changeStatus');
+
+
 Route::resource('/department', 'DepartmentController');
 Route::resource('/division', 'DivisionController');
 Route::resource('/district', 'DistrictController');

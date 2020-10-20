@@ -47,7 +47,7 @@
                                         <td>{{ $ticket->crm->address }}</td>
                                         <td>{{ $ticket->crm->query_type->name }}</td>
                                         <td>{{ $ticket->crm->complain_type->name }}</td>
-                                        <td>{{ Illuminate\Support\Str::limit($ticket->crm->verbatim, 20) }}</td>
+                                        <td>{{ Illuminate\Support\Str::limit($ticket->crm->verbatim, 30) }}</td>
                                         <td>
                                             <form action="/ticket/show/{{ $ticket->id }}" method="get" style ='float: left; padding: 5px;'>
                                                 <button type="submit" class="btn btn-info"><i class="fas fa-eye"></i></button> 

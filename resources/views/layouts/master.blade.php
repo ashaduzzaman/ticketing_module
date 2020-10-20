@@ -119,19 +119,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             @php 
-            
               $currentURL= "";
               $currentPath = \Request::path();
               if(isset($_SERVER['QUERY_STRING'])){
                 $queryString = $_SERVER['QUERY_STRING'];
                 $currentURL = $currentPath.'?'.$queryString;
               }
-
             @endphp
             <ul class="nav nav-treeview sub-nav">
               <li class="nav-item">
                 <a href="{{ route('ticket', ['type' => 'new']) }}" class="nav-link {{ 'ticket?type=new' == $currentURL ? 'active' : '' }}">
-                  <i  style="color: #007bff;" class="fa fa-circle nav-icon"></i>
+                  <i  style="color: #007bff;" class="fa fa-calendar-plus nav-icon"></i>
                   <p>
                     New Ticket
                     <span class="right badge badge-primary">New</span>
@@ -140,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="{{ route('ticket', ['type' => 'wip']) }}" class="nav-link {{ 'ticket?type=wip' == $currentURL ? 'active' : '' }}">
-                  <i style="color: #ffc107;" class="fa fa-circle-notch nav-icon"></i>
+                  <i style="color: #ffc107;" class="fa fa-spinner nav-icon"></i>
                   <p>
                     WIP Ticket
                     <span class="right badge badge-warning">WIP</span>
@@ -149,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="{{ route('ticket', ['type' => 'answered']) }}" class="nav-link {{ 'ticket?type=answered' == $currentURL ? 'active' : '' }}">
-                  <i style="color: #28a745;" class="fa fa-circle nav-icon"></i>
+                  <i style="color: #28a745;" class="fa fa-reply nav-icon"></i>
                   <p>
                     Answered Ticket
                     <span class="right badge badge-success">Ans</span>
@@ -158,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="{{ route('ticket', ['type' => 'closed']) }}" class="nav-link {{ 'ticket?type=closed' == $currentURL ? 'active' : '' }}">
-                  <i style="color: #dc3545;" class="fa fa-circle-notch nav-icon"></i>
+                  <i style="color: #dc3545;" class="fa fa-times nav-icon"></i>
                   <p>
                     Closed Ticket
                     <span class="right badge badge-danger">Closed</span>
