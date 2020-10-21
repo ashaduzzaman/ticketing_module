@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendTicketEmail;
 
 use App\Http\Requests;
 // use App\Models\Option;
@@ -91,7 +92,8 @@ class CrmController extends Controller
                 'verbatim' => $ticket_details->crm->verbatim
             ];
 
-            Mail::to($escalation->user->email)->send(new NewTicketMail($data));
+            // Mail::to($escalation->user)->send(new NewTicketMail($data));
+            SendTicketEmail::dispatch($escalation->user, $data);
 
             return redirect()->back()->with('success','CRM & Ticket saved successfully!');
         }else {
