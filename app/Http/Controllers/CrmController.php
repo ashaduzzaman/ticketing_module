@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Requests;
 // use App\Models\Option;
@@ -14,6 +15,8 @@ use App\Models\QueryType;
 use App\Models\Escalation;
 use App\Models\Ticket;
 use App\Models\Crm;
+use App\User;
+use App\Mail\NewTicketMail;
 Use Alert;
 
 class CrmController extends Controller
@@ -44,7 +47,7 @@ class CrmController extends Controller
     {
         if($request->raiseTicket == 'yes')
         {
-            $escalation = Escalation::where('query_type_id', $request->query_type_id)->first();
+            $escalation = Escalation::where('query_type_id', $request->query_type_id)->with('user')->first();
             $crm = new Crm;
             $crm->customer_contact = $request->customer_contact;
             $crm->agent_name = $request->agent_name;
@@ -65,6 +68,30 @@ class CrmController extends Controller
             $ticket->status = 'NEW';
 
             $ticket->save();
+
+            $ticket_details = Ticket::where('id', '2')->with(['crm','crm.district','crm.district.division','crm.department','crm.query_type','crm.complain_type','crm.call_remark'])->first();
+            $assigned_user = User::where('id', $escalation->user_id)->first();
+            $data = [
+                'ticket_id' => $ticket_details->id,
+                'crm_id' => $ticket_details->crm_id,
+                'ticket_status' => $ticket_details->status,
+                'created_at' => $ticket_details->created_at,
+                'assigned_person' => $assigned_user->name,
+                'agent_name' => $ticket_details->crm->agent_name,
+                'customer_name' => $ticket_details->crm->customer_name,
+                'customer_contact' => $ticket_details->crm->customer_contact,
+                'customer_division' => $ticket_details->crm->district->division->name,
+                'customer_district' => $ticket_details->crm->district->name,
+                'customer_address' => $ticket_details->crm->address,
+                'customer_profession' => $ticket_details->crm->profession,
+                'department' => $ticket_details->crm->department->name,
+                'query_type' => $ticket_details->crm->query_type->name,
+                'complain_type' => $ticket_details->crm->complain_type->name,
+                'call_remark' => $ticket_details->crm->call_remark->name,
+                'verbatim' => $ticket_details->crm->verbatim
+            ];
+
+            Mail::to($escalation->user->email)->send(new NewTicketMail($data));
 
             return redirect()->back()->with('success','CRM & Ticket saved successfully!');
         }else {

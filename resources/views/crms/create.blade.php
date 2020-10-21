@@ -16,7 +16,7 @@
             <strong>{{ $message }}</strong>
         </div>
     @endif
-    <div class="card bg-secondary text-white" style="height: 600px;">
+    <div class="card bg-dark text-white" style="height: 600px;">
         <div class="card-header text-center">
           CRM: Phone No:<mark>{{ $phoneNumber }}</mark> & Agent: <mark>{{ $agent }}</mark>
         </div>

@@ -18,6 +18,10 @@ Route::get('/crm/get-district', 'CrmController@getDistrict');
 Route::get('/crm/create', 'CrmController@create');
 Route::post('/crm/store', 'CrmController@store');
 
+Route::get('/email', function(){
+    return new App\Mail\NewTicketMail();
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
