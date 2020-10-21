@@ -69,7 +69,7 @@ class CrmController extends Controller
 
             $ticket->save();
 
-            $ticket_details = Ticket::where('id', '2')->with(['crm','crm.district','crm.district.division','crm.department','crm.query_type','crm.complain_type','crm.call_remark'])->first();
+            $ticket_details = Ticket::where('id', $ticket->id)->with(['crm','crm.district','crm.district.division','crm.department','crm.query_type','crm.complain_type','crm.call_remark'])->first();
             $assigned_user = User::where('id', $escalation->user_id)->first();
             $data = [
                 'ticket_id' => $ticket_details->id,
