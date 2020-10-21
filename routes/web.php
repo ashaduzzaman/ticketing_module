@@ -29,11 +29,13 @@ Route::get('/ticket', 'TicketController@index')->name('ticket');
 Route::get('/ticket/show/{id}','TicketController@show');
 Route::post('/ticket/{id}','TicketController@changeStatus');
 
-
-Route::resource('/department', 'DepartmentController');
-Route::resource('/division', 'DivisionController');
-Route::resource('/district', 'DistrictController');
-Route::resource('/query-type', 'QueryTypeController');
-Route::resource('/complain-type', 'ComplainTypeController');
-Route::resource('/call-remarks', 'CallRemarkController');
-Route::resource('/escalation', 'EscalationController');
+Route::group(['middleware' => 'isAdmin'], function () {
+    Route::resource('/department', 'DepartmentController');
+    Route::resource('/division', 'DivisionController');
+    Route::resource('/district', 'DistrictController');
+    Route::resource('/query-type', 'QueryTypeController');
+    Route::resource('/complain-type', 'ComplainTypeController');
+    Route::resource('/call-remarks', 'CallRemarkController');
+    Route::resource('/escalation', 'EscalationController');
+    Route::get('/crm', 'CrmController@index');
+});

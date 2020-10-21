@@ -19,9 +19,19 @@ use App\Models\Crm;
 use App\User;
 use App\Mail\NewTicketMail;
 Use Alert;
+use Illuminate\Support\Facades\Input;
+use Validator;
 
 class CrmController extends Controller
 {
+
+    public function index()
+    {
+        $crms = Crm::with('district','query_type','complain_type','department','call_remark')->get();
+        logger($crms);
+
+        return view('crms.index', get_defined_vars());
+    }
     public function create(Request $request)
     {
         $departments = Department::orderBy('name', 'asc')->pluck('name', 'id');
@@ -46,6 +56,40 @@ class CrmController extends Controller
 
     public function store(Request $request)
     {
+        $input = Input::all();
+	    $rules = [
+            'customer_name' => 'required',
+            'customer_contact' => 'required',
+            'agent_name' => 'required',
+            'district_id' => 'required',
+            'address' => 'required',
+            'profession' => 'required',
+            'query_type_id' => 'required',
+            'department_id' => 'required',
+            'complain_type_id' => 'required',
+            'call_remark_id' => 'required',
+	    ];
+	    $messages = [
+            'customer_name.required' => 'The Customer Name Field is required.',
+            'customer_contact.required' => 'The Customer Contact is required',
+            'agent_name.required' => 'The Agent Name is required',
+            'district_id.required' => 'The District Field is required',
+            'address.required' => 'The Address Field is required',
+            'profession.required' => 'The Profession Field is required',
+            'query_type_id.required' => 'The Query Field is required',
+            'department_id.required' => 'The Department Field is required',
+            'complain_type_id.required' => 'The Complain Field is required',
+            'call_remark_id.required' => 'The Call Remark Field is required'
+        ];
+	    
+        $validator = Validator::make($input, $rules, $messages);
+        if($validator->fails()){
+            return redirect()->back()
+                            ->with('error','Something wrong!')
+                            ->withErrors($validator)
+                            ->withInput();
+        }
+
         if($request->raiseTicket == 'yes')
         {
             $escalation = Escalation::where('query_type_id', $request->query_type_id)->with('user')->first();

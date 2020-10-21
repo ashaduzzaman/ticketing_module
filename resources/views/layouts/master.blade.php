@@ -165,6 +165,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          @php 
+              if(Auth::user()->isAdmin){
+          @endphp
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
@@ -225,7 +228,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
@@ -246,6 +248,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          @php 
+              }
+          @endphp
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
