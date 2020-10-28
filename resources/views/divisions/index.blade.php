@@ -47,7 +47,7 @@
                                         <td>{{ $division->name }}</td>
                                         <td>{{ $division->created_at }}</td>
                                         <td>
-                                            <form action="/division/{{ $division->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('division.edit',$division->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <!-- @csrf -->
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>

@@ -47,7 +47,7 @@
                                         <td>{{ $complain_type->name }}</td>
                                         <td>{{ $complain_type->created_at }}</td>
                                         <td>
-                                            <form action="/complain-type/{{ $complain_type->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('complain-type.edit', $complain_type->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <!-- @csrf -->
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>

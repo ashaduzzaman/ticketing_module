@@ -110,7 +110,12 @@ class DepartmentController extends Controller
 
     public function destroy($id)
     {
-        Department::find($id)->delete();
-        return back()->with('success', 'Successfully Deleted!');
+        try {
+            Department::find($id)->delete();
+            return back()->with('success', 'Successfully Deleted!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            Alert::error('Alert!!!', 'Sorry, something went wrong. You can not delete');
+            return back();
+        }
     }
 }

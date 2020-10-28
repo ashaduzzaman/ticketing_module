@@ -49,7 +49,7 @@
                                         <td>
                                             <!-- {!! Html::link("department/$department->id/edit",' Edit', ['class'=> 'fa fa-edit btn btn-success']) !!} -->
                                             <!-- <a href="/department/$department->id/edit" class="btn btn-primary"><i class="fa fa-eye"></i></a> -->
-                                            <form action="/department/{{ $department->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('department.edit',$department->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <!-- @csrf -->
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>

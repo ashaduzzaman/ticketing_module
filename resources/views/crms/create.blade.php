@@ -27,7 +27,7 @@
           CRM: Phone No:<mark>{{ $phoneNumber }}</mark> & Agent: <mark>{{ $agent }}</mark>
         </div>
         <div class="card-body">
-          <form action="/crm/store" method="post">
+          <form action="{{ route('crm.store') }}" method="post" class="form-prevent-multiple-submits">
             @csrf
               <input type="hidden" class="form-control" id="" placeholder="" name="agent_name" value="<?php echo $agent; ?>" required>
               <input type="hidden" class="form-control" id="" placeholder="" name="customer_contact" value="<?php echo $phoneNumber; ?>" required>
@@ -83,8 +83,8 @@
                 <label for="verbatim">Verbatim</label>
                 <input type="text" class="form-control" id="verbatim" name="verbatim" placeholder="Enter Verbatim">
               </div>
-              <button type="submit" class="btn btn-primary btn-block">
-                Submit
+              <button type="submit" class="btn btn-primary btn-block button-prevent-multiple-submits">
+              <i class="spinner fa fa-spinner fa-spin fa-lg"></i> Submit
               </button>
         </form>
         </div> 
@@ -93,5 +93,12 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script>
+      $("i").hide();
+      $('.form-prevent-multiple-submits').on('submit', function(){
+        $('.button-prevent-multiple-submits').attr('disabled','true');
+        $("i").show();
+      })
+  </script>
 </body>
 </html>

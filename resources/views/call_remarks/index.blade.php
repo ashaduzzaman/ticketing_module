@@ -47,7 +47,7 @@
                                         <td>{{ $call_remark->name }}</td>
                                         <td>{{ $call_remark->created_at }}</td>
                                         <td>
-                                            <form action="/call-remarks/{{ $call_remark->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('call-remarks.edit', $call_remark->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>
                                             <form action="{{ url('/call-remarks', ['id' => $call_remark->id]) }}" method="post" style ='float: left; padding: 5px;'>

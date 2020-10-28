@@ -14,11 +14,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Ticketing Module</title>
 
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css"> -->
-<link rel="stylesheet" href="/css/app.css">
+
+<link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.2/themes/mint-choc/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
-
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<!-- <script src="https://use.fontawesome.com/3c93f095a2.js"></script> -->
 <style>
   .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active{
     /* background-image: linear-gradient( 135.9deg,  rgba(109,25,252,1) 16.4%, rgba(125,31,165,1) 56.1% ) !important; */
@@ -74,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-      <img src="/img/logo-dbl.jpg" alt="AdminLTE Logo" class="brand-image elevation-3"
+      <img src="{{ asset('/img/logo-dbl.jpg') }}" alt="AdminLTE Logo" class="brand-image elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">DBL Ceramics</span>
     </a>
@@ -84,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/img/profile.png" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('/img/profile.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           @php if(isset(Auth::user()->name)){
@@ -102,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/home" class="nav-link {{ 'home' == request()->path() ? 'active' : '' }}">
+            <a href="{{ route('home') }}" class="nav-link {{ '/' == \Request::path() ? 'active' : '' }}">
               <i style="color: #ECBF08;" class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Home Page
@@ -114,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
               <i style="color: #4BE7EF;" class="nav-icon fas fa-ticket-alt"></i>
               <p>
-                Tickets
+                Ticket Panel
                 <i style="color: #1A4772;" class="right fa fa-angle-left"></i>
               </p>
             </a>
@@ -163,6 +167,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('ticket.downloadPanel') }}" class="nav-link {{ 'ticket/downloadPanel' ==  $currentPath ? 'active' : '' }}">
+                  <i style="color: #C48D2C;" class="fas fa-clipboard nav-icon"></i>
+                  <p>
+                    Report Download
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
           @php 
@@ -179,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview sub-nav">
               <li class="nav-item">
-                <a href="/department" class="nav-link {{ 'department' == \Request::segment(1) ? 'active' : '' }}">
+                <a href="{{ route('department.index') }}" class="nav-link {{ 'department' == \Request::segment(1) ? 'active' : '' }}">
                   <i style="color: #15BAA6;" class="fa fa-building nav-icon"></i>
                   <p>
                     Departments
@@ -187,23 +199,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/division" class="nav-link {{ 'division' == \Request::segment(1) ? 'active' : '' }}">
-                  <i style="color: #15BA65;" class="fa fa-globe-asia nav-icon"></i>
+                <a href="{{ route('division.index') }}" class="nav-link {{ 'division' == \Request::segment(1) ? 'active' : '' }}">
+                  <i style="color: #15BA65;" class="fas fa-globe-asia nav-icon"></i>
                   <p>
                     Divisions
                   </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/district" class="nav-link {{ 'district' == \Request::segment(1) ? 'active' : '' }}">
-                  <i style="color: #BA6A15;" class="fa fa-map-marked-alt nav-icon"></i>
+                <a href="{{ route('district.index') }}" class="nav-link {{ 'district' == \Request::segment(1) ? 'active' : '' }}">
+                  <i style="color: #BA6A15;" class="fas fa-map-marked-alt nav-icon"></i>
                   <p>
                     Districts
                   </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/query-type" class="nav-link {{ 'query-type' == \Request::segment(1) ? 'active' : '' }}">
+                <a href="{{ route('query-type.index') }}" class="nav-link {{ 'query-type' == \Request::segment(1) ? 'active' : '' }}">
                   <i style="color: #5F6BF2;" class="fa fa-question-circle nav-icon"></i>
                   <p>
                     Query Type
@@ -211,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/complain-type" class="nav-link {{ 'complain-type' == \Request::segment(1) ? 'active' : '' }}">
+                <a href="{{ route('complain-type.index') }}" class="nav-link {{ 'complain-type' == \Request::segment(1) ? 'active' : '' }}">
                   <i style="color: #ff0000;" class="fa fa-exclamation-triangle nav-icon"></i>
                   <p>
                     Complain Type
@@ -219,8 +231,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/call-remarks" class="nav-link {{ 'call-remarks' == \Request::segment(1) ? 'active' : '' }}">
-                  <i style="color: #59b300;" class="fa fa-comment-dots nav-icon"></i>
+                <a href="{{ route('call-remarks.index') }}" class="nav-link {{ 'call-remarks' == \Request::segment(1) ? 'active' : '' }}">
+                  <i style="color: #59b300;" class="fas fa-comment-dots nav-icon"></i>
                   <p>
                     Call Remarks
                   </p>
@@ -239,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview sub-nav">
               <li class="nav-item">
-                <a href="/escalation" class="nav-link {{ 'escalation' == \Request::segment(1) ? 'active' : '' }}">
+                <a href="{{ route('escalation.index') }}" class="nav-link {{ 'escalation' == \Request::segment(1) ? 'active' : '' }}">
                   <i style="color: #D41397;" class="fas fa-sitemap nav-icon"></i>
                   <p>
                     Mapping
@@ -248,9 +260,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          
           @php 
               }
           @endphp
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+              <i  style="color: #4BE7EF;" class="nav-icon fa fa-paperclip"></i>
+              <p>
+                Crm Panel
+                <i style="color: #1A4772;" class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview sub-nav">
+              <li class="nav-item">
+                <a href="{{ route('crm') }}" class="nav-link {{ 'crm' == $currentPath ? 'active' : '' }}">
+                  <i style="color: #BBC868;" class="nav-icon fas fa-poll-h"></i>
+                  <p>
+                    Crm List
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('crm.downloadPanel') }}" class="nav-link {{ 'crm/downloadPanel' == $currentPath ? 'active' : '' }}">
+                  <i style="color: #C48D2C;" class="nav-icon fas fa-clipboard"></i>
+                  <p>
+                    Report Download
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -291,11 +332,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- ./wrapper -->
     @include('sweetalert::alert')
-    <script src="/js/app.js"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
@@ -304,18 +348,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @yield('scripts')
 
     <script>
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
 
       $(document).ready(function(){
         $('.nav-link').click(function(e){
           console.log(e);
         })
       });
-
-      var pathname = window.location.pathname;
-      console.log(pathname);
     </script>
 </body>
 </html>

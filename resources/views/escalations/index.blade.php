@@ -49,7 +49,7 @@
                                         <td>{{ $escalation->user->email }}</td>
                                         <td>{{ $escalation->mail_cc }}</td>
                                         <td>
-                                            <form action="/escalation/{{ $escalation->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('escalation.edit', $escalation->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <!-- @csrf -->
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>

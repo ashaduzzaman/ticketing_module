@@ -49,7 +49,7 @@
                                         <td>{{ $district->division->name }}</td>
                                         <td>{{ $district->created_at }}</td>
                                         <td>
-                                            <form action="/district/{{ $district->id }}/edit" method="get" style ='float:left; padding: 5px;'>
+                                            <form action="{{ route('district.edit', $district->id) }}" method="get" style ='float:left; padding: 5px;'>
                                                 <!-- @csrf -->
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>

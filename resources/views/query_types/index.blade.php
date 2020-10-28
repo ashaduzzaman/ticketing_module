@@ -47,7 +47,7 @@
                                         <td>{{ $query_type->name }}</td>
                                         <td>{{ $query_type->created_at }}</td>
                                         <td>
-                                            <form action="/query-type/{{ $query_type->id }}/edit" method="get" style ='float: left; padding: 5px;'>
+                                            <form action="{{ route('query-type.edit', $query_type->id) }}" method="get" style ='float: left; padding: 5px;'>
                                                 <button type="submit" class="btn btn-success"><i class="fa fa-pencil-alt"></i></button> 
                                             </form>
                                             <form action="{{ url('/query-type', ['id' => $query_type->id]) }}" method="post" style ='float: left; padding: 5px;'>

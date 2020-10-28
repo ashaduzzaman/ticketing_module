@@ -12,6 +12,6 @@ class Division extends Model
 
     public function districts()
     {
-        return $this->hasMany('App\Models\District');
+        return $this->hasMany(District::class);
     }
 }

@@ -2,32 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Jobs\SendTicketEmail;
+use App\User;
+use Validator;
+use App\Models\Crm;
 
 use App\Http\Requests;
 // use App\Models\Option;
-use App\Models\Department;
-use App\Models\District;
-use App\Models\CallRemark;
-use App\Models\ComplainType;
-use App\Models\QueryType;
-use App\Models\Escalation;
 use App\Models\Ticket;
-use App\Models\Crm;
-use App\User;
+use App\Models\District;
+use App\Models\QueryType;
+use App\Models\CallRemark;
+use App\Models\Department;
+use App\Models\Escalation;
+use App\Exports\CrmsExport;
 use App\Mail\NewTicketMail;
+use App\Models\ComplainType;
+use Illuminate\Http\Request;
 Use Alert;
+use App\Jobs\SendTicketEmail;
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Input;
-use Validator;
 
 class CrmController extends Controller
 {
 
     public function index()
     {
-        $crms = Crm::with('district','query_type','complain_type','department','call_remark')->get();
+        $crms = Crm::with('district','district.division','query_type','complain_type','department','call_remark')->get();
         logger($crms);
 
         return view('crms.index', get_defined_vars());
@@ -136,8 +138,8 @@ class CrmController extends Controller
                 'verbatim' => $ticket_details->crm->verbatim
             ];
 
-            // Mail::to($escalation->user)->send(new NewTicketMail($data));
-            SendTicketEmail::dispatch($escalation->user, $data);
+            Mail::to($escalation->user)->send(new NewTicketMail($data));
+            // SendTicketEmail::dispatch($escalation->user, $data);
 
             return redirect()->back()->with('success','CRM & Ticket saved successfully!');
         }else {
@@ -156,5 +158,25 @@ class CrmController extends Controller
             $crm->save();
             return redirect()->back()->with('success','CRM saved successfully!');
         }
+    }
+
+    public function searchByDate(Request $request)
+    {
+        logger($request);
+    }
+
+    public function downloadPanel()
+    {
+        return view('crms.downloadPanel');
+    }
+
+    public function download(Request $request)
+    {
+            $export = new CrmsExport([
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date, 
+        ]);
+
+        return Excel::download($export, 'crms.xlsx');
     }
 }

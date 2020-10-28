@@ -11,23 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/crm/get-district', 'CrmController@getDistrict');
 Route::get('/crm/create', 'CrmController@create');
-Route::post('/crm/store', 'CrmController@store');
+Route::post('/crm/store', 'CrmController@store')->name('crm.store');
 
-Route::get('/email', function(){
-    return new App\Mail\NewTicketMail();
-});
+// Route::get('/email', function(){
+//     return new App\Mail\NewTicketMail();
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/ticket', 'TicketController@index')->name('ticket');
-Route::get('/ticket/show/{id}','TicketController@show');
-Route::post('/ticket/{id}','TicketController@changeStatus');
+Route::get('/ticket/show/{id}','TicketController@show')->where('id', '[0-9]+')->name('ticket.show');
+Route::post('/ticket/{id}','TicketController@changeStatus')->where('id', '[0-9]+');
+Route::get('/ticket/downloadPanel','TicketController@downloadPanel')->name('ticket.downloadPanel');
+Route::post('/ticket/download','TicketController@download');
+
+Route::get('/crm', 'CrmController@index')->name('crm');
+Route::get('/crm/downloadPanel','CrmController@downloadPanel')->name('crm.downloadPanel');
+Route::post('/crm/download','CrmController@download')->name('crm.download');
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('/department', 'DepartmentController');
@@ -37,5 +41,4 @@ Route::group(['middleware' => 'isAdmin'], function () {
     Route::resource('/complain-type', 'ComplainTypeController');
     Route::resource('/call-remarks', 'CallRemarkController');
     Route::resource('/escalation', 'EscalationController');
-    Route::get('/crm', 'CrmController@index');
 });

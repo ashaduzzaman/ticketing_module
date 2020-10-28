@@ -46,8 +46,6 @@ class HomeController extends Controller
                     $closed = $ticket_count->id;
             }
         }
-
-        logger($answered);
         return view('home', get_defined_vars());
     }
 }

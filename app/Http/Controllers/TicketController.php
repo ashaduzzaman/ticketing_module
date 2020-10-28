@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Ticket;
 use Auth;
 use Alert;
+use App\Models\Ticket;
+use Illuminate\Http\Request;
+use App\Exports\TicketsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class TicketController extends Controller
 {
 
@@ -63,5 +66,25 @@ class TicketController extends Controller
         Alert::success('Success', 'Ticket Status changed successfully');
 
         return redirect()->route('ticket',['type'=> $ticket->status]);
+    }
+
+
+    public function downloadPanel()
+    {
+        return view('tickets.downloadPanel');
+    }
+
+    public function download(Request $request)
+    {
+
+        $export = new TicketsExport([
+            
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'type' => $request->type
+            
+        ]);
+
+        return Excel::download($export, 'tickets.xlsx');
     }
 }

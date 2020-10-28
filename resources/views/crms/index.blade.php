@@ -20,7 +20,7 @@
                 <div class="col">
                     <div class="card text-center">
                         <div class="card-header">
-                            <div class="col-md-10">
+                            <div class="col-md-5">
                                 <h3 class="card-title">CRM List</h3>
                             </div>
                         </div>
@@ -31,6 +31,7 @@
                                         <th>CRM ID</th>
                                         <th>Customer Name</th>
                                         <th>Customer Contact</th>
+                                        <th>Division</th>
                                         <th>District</th>
                                         <th>Address</th>
                                         <th>Query</th>
@@ -40,12 +41,13 @@
                                 </thead>
                                 <tbody>
                                 @foreach($crms as $crm)
-                                @php dd($crm); @endphp
+                                
                                     <tr>
                                         <td>{{ $crm->id }}</td>
                                         <td>{{ $crm->customer_name }}</td>
                                         <td>{{ $crm->customer_contact }}</td>
                                         <td>{{ $crm->district->name }}</td>
+                                        <td>{{ $crm->district->division->name }}</td>
                                         <td>{{ $crm->address }}</td>
                                         <td>{{ $crm->query_type->name }}</td>
                                         <td>{{ $crm->complain_type->name }}</td>
